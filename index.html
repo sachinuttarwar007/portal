@@ -4,10 +4,12 @@
 		<meta charset="utf-8" /> 
 		<link rel='shortcut icon' type='image/x-icon' href='images/fav.ico' />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/bootstrap.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="js/jquery.js"></script>
+		<script src="js/bootstrap.js"></script>
+		<script src="js/mandril.js"></script>
+		<script src="js/mandril.js"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -20,7 +22,7 @@
 						</div>
 						<div class="panel-body">
 							<br>
-							<form class="form-horizontal">
+							<form name='hi-loginForm' id='hi-loginForm' class="form-horizontal" role="form">
 								<div class="form-group">
 									<label for="firstname" class="col-sm-4 control-label">First Name:</label>
 									<div class="col-sm-6 input-group">
@@ -82,7 +84,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="accomodation" class="col-sm-4 control-label">No Of People Accompying:</label>
+									<label for="No Of People" class="col-sm-4 control-label">No Of People Accompying:</label>
 									<div class="col-sm-6 input-group">
 										<span class="input-group-addon"><i class="fa fa-users fa-fw"></i></span>
 										<input type='number' id="noofpeople" placeholder="No Of People" class="form-control" />
@@ -90,7 +92,7 @@
 								</div>
 								<div class="form-group text-center">
 									<div>
-										<button id="submitbtn" class="btn btn-default"><i class="fa fa-sign-in"></i> Submit</button>
+										<button id="submitbtn" class="btn btn-default" ><i class="fa fa-sign-in"></i> Submit</button>
 									</div>
 								</div>
 							</form>
@@ -101,24 +103,38 @@
 		</div>
 	<script type="text/javascript">
 	 $(document).ready(function(){
-		$( "#submitbtn" ).click(function() {
-				var firstName = $("#firstname").val();
+		$( "#submitbtn" ).click(function(e) {
+				e.preventDefault();
+				var firstName = " Alumini Name: "+ $("#firstname").val() + " ";
 				var	lastName = $("#lastname").val();
 				var	email = $("#email").val();
-				var	contact = $("#contact").val();
-				var	graduationYear = $("#graduationyear").val();
-				var	dateArrival = $("#doa").val();
-				var	accomodationReq = $("input[name='Accomodation']:checked").val();
-				var	noofDay = $("#noofday").val();
-				var	noofPeople = $("#noofpeople").val();
-				console.log("Hello");
-				alert("FirstName: "+firstName+"LAST NAME: "+lastName+"EMAIL: "+email+"CONTACT "+contact+"GRADDAY"+graduationYear+"doa"+dateArrival+"accREq"+accomodationReq+"nod"+noofDay+"nop"+noofPeople);
-					
+				var	contact = " Contact Number: " + $("#contact").val() + "<br />" ;
+				var	graduationYear = " Graduation Year: " + $("#graduationyear").val() + "<br />" ;
+				var	dateArrival = " Arrival Date:" + $("#doa").val() + "<br />";
+				var	accomodationReq = " Accomodation Required: " + $("input[name='accomodation']:checked").val() +"<br />";
+				var	noofDay = " No Of Days Stay: " + $("#noofday").val() + "<br />";
+				var	noofPeople = " No Of People: " + $("#noofpeople").val() + "<br />";
+				
+				var m = new mandrill.Mandrill('hVFirhszVLpK63VyhnK5bQ'); // This will be public
+
+				function sendTheMail(){
+					m.messages.send({
+						"message": {
+							"from_email": "aushtosh@obitors.com",
+							"from_name": "Sachin Uttarwar",
+							"to":[
+								{"email": email, "name": firstName + lastName, "type": "to"},
+								{"email": "sachin.uttarwar007@gmail", "name": "Sachin Uttarwar", "type": "cc"}
+							], // Array of recipients
+							"subject": "IIT KGP Welcomens You !!!",
+							"text": "Plese find the Details you have entered: " + firstName + lastName + contact + graduationYear + dateArrival + accomodationReq + noofDay + noofPeople// Alternatively, use the "html" key to send HTML emails rather than plaintext
+						}
+					});
+				}
+				
+				sendTheMail();
 		})
 	});
 	</script>
 	</body>
 </html>
-
-
-
