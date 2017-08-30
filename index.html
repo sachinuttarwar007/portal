@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title> ALUMINI PORTAL </title>
+		<title> ALUMNI PORTAL </title>
 		<meta charset="utf-8" /> 
 		<link rel='shortcut icon' type='image/x-icon' href='images/fav.ico' />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +18,7 @@
 					<br>
 					<div class="panel panel-default">
 						<div class="panel-heading text-center hi-loginPage-panelHeader">
-							<h3 class="panel-heading text-center hi-loginPage-panelHeaderText">Alumini Portal</h3>
+							<h3 class="panel-heading text-center hi-loginPage-panelHeaderText">Alumni Portal</h3>
 						</div>
 						<div class="panel-body">
 							<br>
@@ -66,13 +66,20 @@
 									</div>
 								</div>
 								<div class="form-group">
+									<label for="ReasonOfArrival" class="col-sm-4 control-label">Reason Of Arrival:</label>
+									<div class="col-sm-6 input-group">
+										<span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+										<input class="form-control" id="ResionOfArrival" placeholder="Reason Of Arrival" type='text'/>
+									</div>
+								</div>
+								<div class="form-group">
 									<label for="accomodation" class="col-sm-4 control-label">Accomodation Required:</label>
 									<div class="col-sm-6 input-group">
 										<label class="radio-inline">
-										  <input type="radio" class="checkbox-inline" name="AccomodationReq" value="Yes" checked> Yes<br>
+										  <input type="radio" class="checkbox-inline" name="AccomodationReq" value="Yes"> Yes<br>
 										</label>
 										<label class="radio-inline">
-										  <input type="radio" class="checkbox-inline" name="AccomodationReq" value="No"> No<br>
+										  <input type="radio" class="checkbox-inline" name="AccomodationReq" value="No" checked> No<br>
 										</label>
 									</div>
 								</div>
@@ -90,6 +97,13 @@
 										<input type='number' id="noofpeople" placeholder="No Of People" class="form-control" />
 									</div>
 								</div>
+								<div class="form-group">
+									<label for="Queries" class="col-sm-4 control-label">Any Queries:</label>
+									<div class="col-sm-6 input-group">
+										<span class="input-group-addon"><i class="fa fa-question-circle"></i></span>
+										<input class="form-control" id="AnyQueries" placeholder="Enter Your Queries Here" type='text'/>
+									</div>
+								</div>
 								<div class="form-group text-center">
 									<div>
 										<button id="submitbtn" class="btn btn-default" ><i class="fa fa-sign-in"></i> Submit</button>
@@ -105,7 +119,7 @@
 	 $(document).ready(function(){
 		$( "#submitbtn" ).click(function(e) {
 				e.preventDefault();
-				var firstName = "<b>Alumini Name: </b>"+ $("#firstname").val() + " ";
+				var firstName = "<b>Alumni Name: </b>"+ $("#firstname").val() + " ";
 				var	lastName = $("#lastname").val();
 				var	email = $("#email").val();
 				var	contact = " <b>Contact Number: </b>" + $("#contact").val() + "<br />" ;
@@ -114,7 +128,8 @@
 				var	accomodationReq = " <b>Accomodation Required: </b>" + $("input[name='AccomodationReq']:checked").val() +"<br />";
 				var	noofDay = " <b>No Of Days Stay: </b>" + $("#noofday").val() + "<br />";
 				var	noofPeople = " <b>No Of People: </b>" + $("#noofpeople").val() + "<br />";
-				
+				var anyQueries = " <b> Queries Details: </b>" + $("#AnyQueries").val()+ "<br />";
+				var resionOfArrival = " <b> Resion Of Arrival </b>" + $("#ResionOfArrival").val()+ "<br />";
 				console.log("Accomodation Req: ", accomodationReq);
 				var m = new mandrill.Mandrill('hVFirhszVLpK63VyhnK5bQ'); // This will be public
 
@@ -122,13 +137,13 @@
 					m.messages.send({
 						"message": {
 							"from_email": "aushtosh@obitors.com",
-							"from_name": "DEPARTMENT OF ARP",
+							"from_name": "Sachin Uttarwar",
 							"to":[
 								{"email": email, "name": firstName + lastName, "type": "to"},
 								{"email": "sachin.uttarwar007@gmail.com", "name": "Sachin Uttarwar", "type": "cc"}
 							], // Array of recipients
 							"subject": "IIT KGP Welcomens You !!!",
-							"html": "<b>Plese find the Details you have entered: </b><br>" + firstName + lastName + "<br>"  +contact + graduationYear + dateArrival + accomodationReq + noofDay + noofPeople,
+							"html": "<b>Plese find the Details you have entered: </b><br>" + firstName + lastName + "<br>"  +contact + graduationYear + dateArrival + resionOfArrival + accomodationReq + noofDay + noofPeople + anyQueries,
 							"auto_html": true,
 							"async": true
 						}
