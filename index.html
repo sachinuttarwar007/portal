@@ -73,13 +73,13 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="accomodation" class="col-sm-4 control-label">Accomodation Required:</label>
+									<label for="accommodation" class="col-sm-4 control-label">Accommodation Required:</label>
 									<div class="col-sm-6 input-group">
 										<label class="radio-inline">
-										  <input type="radio" class="checkbox-inline" name="AccomodationReq" value="Yes"> Yes<br>
+										  <input type="radio" class="checkbox-inline" name="AccommodationReq" value="Yes"> Yes<br>
 										</label>
 										<label class="radio-inline">
-										  <input type="radio" class="checkbox-inline" name="AccomodationReq" value="No" checked> No<br>
+										  <input type="radio" class="checkbox-inline" name="AccommodationReq" value="No" checked> No<br>
 										</label>
 									</div>
 								</div>
@@ -125,12 +125,12 @@
 				var	contact = " <b>Contact Number: </b>" + $("#contact").val() + "<br />" ;
 				var	graduationYear = " <b>Graduation Year: </b>" + $("#graduationyear").val() + "<br />" ;
 				var	dateArrival = " <b> Arrival Date: </b>" + $("#doa").val() + "<br />";
-				var	accomodationReq = " <b>Accomodation Required: </b>" + $("input[name='AccomodationReq']:checked").val() +"<br />";
+				var	accommodationReq = " <b>Accommodation Required: </b>" + $("input[name='AccommodationReq']:checked").val() +"<br />";
 				var	noofDay = " <b>No Of Days Stay: </b>" + $("#noofday").val() + "<br />";
 				var	noofPeople = " <b>No Of People: </b>" + $("#noofpeople").val() + "<br />";
 				var anyQueries = " <b> Queries Details: </b>" + $("#AnyQueries").val()+ "<br />";
 				var resionOfArrival = " <b> Resion Of Arrival </b>" + $("#ResionOfArrival").val()+ "<br />";
-				console.log("Accomodation Req: ", accomodationReq);
+				console.log("Accommodation Req: ", accommodationReq);
 				var m = new mandrill.Mandrill('hVFirhszVLpK63VyhnK5bQ'); // This will be public
 
 				function sendTheMail(){
@@ -142,8 +142,8 @@
 								{"email": email, "name": firstName + lastName, "type": "to"},
 								{"email": "sachin.uttarwar007@gmail.com", "name": "Sachin Uttarwar", "type": "cc"}
 							], // Array of recipients
-							"subject": "IIT KGP Welcomens You !!!",
-							"html": "<b>Plese find the Details you have entered: </b><br>" + firstName + lastName + "<br>"  +contact + graduationYear + dateArrival + resionOfArrival + accomodationReq + noofDay + noofPeople + anyQueries,
+							"subject": "IIT KGP Welcomes You !!!",
+							"html": "<b>Plese find the Details you have entered: </b><br>" + firstName + lastName + "<br>"  +contact + graduationYear + dateArrival + resionOfArrival + accommodationReq + noofDay + noofPeople + anyQueries,
 							"auto_html": true,
 							"async": true
 						}
