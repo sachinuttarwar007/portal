@@ -66,10 +66,10 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="ReasonOfArrival" class="col-sm-4 control-label">Reason Of Arrival:</label>
+									<label for="ReasonOfvisit" class="col-sm-4 control-label">Reason Of visit:</label>
 									<div class="col-sm-6 input-group">
 										<span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-										<input class="form-control" id="ResionOfArrival" placeholder="Reason Of Arrival" type='text'/>
+										<input class="form-control" id="ReasonOfvisit" placeholder="Reason Of visit" type='text'/>
 									</div>
 								</div>
 								<div class="form-group">
@@ -129,7 +129,7 @@
 				var	noofDay = " <b>No Of Days Stay: </b>" + $("#noofday").val() + "<br />";
 				var	noofPeople = " <b>No Of People: </b>" + $("#noofpeople").val() + "<br />";
 				var anyQueries = " <b> Queries Details: </b>" + $("#AnyQueries").val()+ "<br />";
-				var resionOfArrival = " <b> Resion Of Arrival </b>" + $("#ResionOfArrival").val()+ "<br />";
+				var reasonOfvisit = " <b> Reason Of visit </b>" + $("#ReasonOfvisit").val()+ "<br />";
 				console.log("Accommodation Req: ", accommodationReq);
 				var m = new mandrill.Mandrill('hVFirhszVLpK63VyhnK5bQ'); // This will be public
 
@@ -143,7 +143,7 @@
 								{"email": "sachin.uttarwar007@gmail.com", "name": "Sachin Uttarwar", "type": "cc"}
 							], // Array of recipients
 							"subject": "IIT KGP Welcomes You !!!",
-							"html": "<b>Plese find the Details you have entered: </b><br>" + firstName + lastName + "<br>"  +contact + graduationYear + dateArrival + resionOfArrival + accommodationReq + noofDay + noofPeople + anyQueries,
+							"html": "<b>Plese find the Details you have entered: </b><br>" + firstName + lastName + "<br>"  +contact + graduationYear + dateArrival + reasonOfArrival + accommodationReq + noofDay + noofPeople + anyQueries,
 							"auto_html": true,
 							"async": true
 						}
