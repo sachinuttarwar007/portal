@@ -6,12 +6,20 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="css/bootstrap.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/css/bootstrap-notify.min.css" />
 		<script src="js/jquery.js"></script>
 		<script src="js/bootstrap.js"></script>
 		<script src="js/mandril.js"></script>
 		<script src="js/mandril.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/js/bootstrap-notify.min.js"></script>
+		<style>
+			.alert{
+				display: none;
+			}
+		</style>
 	</head>
 	<body>
+	
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2">
@@ -22,7 +30,7 @@
 						</div>
 						<div class="panel-body">
 							<br>
-							<form name='hi-loginForm' id='hi-loginForm' class="form-horizontal" role="form">
+							<form name='contact-form' id='contact-form' class="form-horizontal" role="form">
 								<div class="form-group">
 									<label for="firstname" class="col-sm-4 control-label">First Name:</label>
 									<div class="col-sm-6 input-group">
@@ -66,20 +74,20 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="ReasonOfvisit" class="col-sm-4 control-label">Reason Of visit:</label>
+									<label for="ReasonOfArrival" class="col-sm-4 control-label">Reason Of Arrival:</label>
 									<div class="col-sm-6 input-group">
 										<span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-										<input class="form-control" id="ReasonOfvisit" placeholder="Reason Of visit" type='text'/>
+										<input class="form-control" id="ResionOfArrival" placeholder="Reason Of Arrival" type='text'/>
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="accommodation" class="col-sm-4 control-label">Accommodation Required:</label>
+									<label for="accomodation" class="col-sm-4 control-label">Accommodation Required:</label>
 									<div class="col-sm-6 input-group">
 										<label class="radio-inline">
-										  <input type="radio" class="checkbox-inline" name="AccommodationReq" value="Yes"> Yes<br>
+										  <input type="radio" class="checkbox-inline" name="AccomodationReq" value="Yes"> Yes<br>
 										</label>
 										<label class="radio-inline">
-										  <input type="radio" class="checkbox-inline" name="AccommodationReq" value="No" checked> No<br>
+										  <input type="radio" class="checkbox-inline" name="AccomodationReq" value="No" checked> No<br>
 										</label>
 									</div>
 								</div>
@@ -91,7 +99,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="No Of People" class="col-sm-4 control-label">No Of People Accompying:</label>
+									<label for="No Of People" class="col-sm-4 control-label">No Of People accompanying:</label>
 									<div class="col-sm-6 input-group">
 										<span class="input-group-addon"><i class="fa fa-users fa-fw"></i></span>
 										<input type='number' id="noofpeople" placeholder="No Of People" class="form-control" />
@@ -110,27 +118,33 @@
 									</div>
 								</div>
 							</form>
+							<div class="alert alert-success alert-dismissable">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+								<i class="fa fa-check" aria-hidden="true"></i> Thanks for taking out time  !
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	<script type="text/javascript">
-	 $(document).ready(function(){
+
+	$(document).ready(function(){
 		$( "#submitbtn" ).click(function(e) {
 				e.preventDefault();
-				var firstName = "<b>Alumni Name: </b>"+ $("#firstname").val() + " ";
+
+				var firstName = "<b>Alumini Name: </b>"+ $("#firstname").val() + " ";
 				var	lastName = $("#lastname").val();
 				var	email = $("#email").val();
 				var	contact = " <b>Contact Number: </b>" + $("#contact").val() + "<br />" ;
 				var	graduationYear = " <b>Graduation Year: </b>" + $("#graduationyear").val() + "<br />" ;
 				var	dateArrival = " <b> Arrival Date: </b>" + $("#doa").val() + "<br />";
-				var	accommodationReq = " <b>Accommodation Required: </b>" + $("input[name='AccommodationReq']:checked").val() +"<br />";
+				var	accomodationReq = " <b>Accomodation Required: </b>" + $("input[name='AccomodationReq']:checked").val() +"<br />";
 				var	noofDay = " <b>No Of Days Stay: </b>" + $("#noofday").val() + "<br />";
 				var	noofPeople = " <b>No Of People: </b>" + $("#noofpeople").val() + "<br />";
 				var anyQueries = " <b> Queries Details: </b>" + $("#AnyQueries").val()+ "<br />";
-				var reasonOfvisit = " <b> Reason Of visit </b>" + $("#ReasonOfvisit").val()+ "<br />";
-				console.log("Accommodation Req: ", accommodationReq);
+				var resionOfArrival = " <b> Resion Of Arrival </b>" + $("#ResionOfArrival").val()+ "<br />";
+				console.log("Accomodation Req: ", accomodationReq);
 				var m = new mandrill.Mandrill('hVFirhszVLpK63VyhnK5bQ'); // This will be public
 
 				function sendTheMail(){
@@ -143,14 +157,17 @@
 								{"email": "sachin.uttarwar007@gmail.com", "name": "Sachin Uttarwar", "type": "cc"}
 							], // Array of recipients
 							"subject": "IIT KGP Welcomes You !!!",
-							"html": "<b>Plese find the Details you have entered: </b><br>" + firstName + lastName + "<br>"  +contact + graduationYear + dateArrival + reasonOfArrival + accommodationReq + noofDay + noofPeople + anyQueries,
+							"html": "<b>Plese find the Details you have entered: </b><br>" + firstName + lastName + "<br>"  +contact + graduationYear + dateArrival + resionOfArrival + accomodationReq + noofDay + noofPeople + anyQueries,
 							"auto_html": true,
 							"async": true
 						}
 					});
 				}
 				
-				sendTheMail();
+				$(sendTheMail()).promise().done(function() {
+					$('.alert').show();
+					document.getElementById("contact-form").reset();
+				});
 		})
 	});
 	</script>
